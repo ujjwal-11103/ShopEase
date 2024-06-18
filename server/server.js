@@ -22,7 +22,7 @@ app.use('/api/v1/auth', authRoute)
 
 // rest APi
 app.get('/', (req, res) => {
-    res.send(`Connected to server succesffuly on ${process.env.Dev_mode} mode`);
+    res.send(`Connected to server succesfully on ${process.env.Dev_mode} mode`);
 })
 
 
