@@ -1,0 +1,35 @@
+.ctn-container {
+    width: 100vw;
+    height: auto;
+    padding: 20px;
+    /* background-color: rgb(166, 137, 99); */
+}
+
+.ctn-container h1 {
+    text-align: center;
+}
+
+.ctn-mid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ctn-left {
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ctn-left img {
+    width: 20vw;
+    height: 40vh;
+}
+
+.ctn-right {
+    width: 50vw;
+    height: 100%;
+    padding: 20px;
+}

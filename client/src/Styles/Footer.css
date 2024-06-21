@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap');
+
+.footer {
+    color: white;
+    background: #0F2027;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    padding: 5px;
+}
+
+.footer-links {
+
+    text-align: center;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: white;
+    padding: 0px 5px;
+}
+
+.footer-links a:hover {
+    color: rgb(231, 223, 223);
+    border-bottom: 1px solid rgb(194, 190, 190);
+}

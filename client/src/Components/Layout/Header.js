@@ -1,5 +1,6 @@
 import React from 'react'
-import { NavLink } from "react-router-dom"
+import "../../Styles/Header.css"
+import { Link, NavLink } from "react-router-dom"
 
 const Header = () => {
     return (
@@ -14,7 +15,10 @@ const Header = () => {
 
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-                        <NavLink to='/' className="navbar-brand">LOGO</NavLink>
+                        <div className="logo">
+                            <Link to='/' className="navbar-brand"> 🛍️ ShopEase
+                            </Link>
+                        </div>
 
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">

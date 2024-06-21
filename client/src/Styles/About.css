@@ -1,0 +1,18 @@
+.abt-container {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.abt-title {
+    text-align: center;
+}
+
+.abt-text {
+    width: 80vw;
+    height: 100%;
+}

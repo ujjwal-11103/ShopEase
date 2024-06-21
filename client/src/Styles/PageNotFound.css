@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap');
+
+.pnf-container {
+    width: 100vw;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pnf-Navlink a {
+    color: rgb(87, 86, 86);
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid black;
+}
+
+.pnf-Navlink a:hover {
+    background-color: gray;
+    color: white;
+}
