@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
                 token: parseData.token
             })
         }
-    }, [auth])
+    }, [])
 
     return (
         <div>

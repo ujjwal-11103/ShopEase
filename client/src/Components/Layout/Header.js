@@ -2,6 +2,7 @@ import React from 'react'
 import "../../Styles/Header.css"
 import { Link, NavLink } from "react-router-dom"
 import { useAuth } from '../../context/auth'
+import toast from 'react-hot-toast'
 
 const Header = () => {
 
@@ -13,6 +14,7 @@ const Header = () => {
             user: null,
             token: " "
         })
+        toast.success("Logout Successfull")
         localStorage.removeItem('auth')
     }
 
