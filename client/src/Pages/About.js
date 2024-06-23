@@ -5,7 +5,7 @@ import "../Styles/About.css"
 const About = () => {
     return (
         <div>
-            <Layout>
+            <Layout title={"About Us"}>
                 <div className="abt-container">
                     <div className="abt-title">
                         <h1>About Us</h1>

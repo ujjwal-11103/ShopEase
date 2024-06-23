@@ -6,7 +6,7 @@ import "../Styles/PageNotFound.css"
 const PageNotFound = () => {
     return (
         <div>
-            <Layout>
+            <Layout title={"404 - Not found"}>
                 <div className="pnf-container">
                     <div className="pnf-status">
                         <h1>Error : 404</h1>

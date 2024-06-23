@@ -5,7 +5,7 @@ import "../Styles/Contact.css"
 const Contact = () => {
     return (
         <div>
-            <Layout>
+            <Layout title={"Contact Us"}>
                 {/* <div className="ctn-container">
                     <h1>Contact Us</h1>
 

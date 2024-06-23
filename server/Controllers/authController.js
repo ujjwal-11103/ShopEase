@@ -9,19 +9,19 @@ export const registerController = async (req, res) => {
 
         // validation
         if (!name) {
-            return res.send({ error: "Name is required" })
+            return res.send({ message: "Name is required" })
         }
         if (!email) {
-            return res.send({ error: "email is required" })
+            return res.send({ message: "email is required" })
         }
         if (!password) {
-            return res.send({ error: "password is required" })
+            return res.send({ message: "password is required" })
         }
         if (!phone) {
-            return res.send({ error: "phone is required" })
+            return res.send({ message: "phone is required" })
         }
         if (!address) {
-            return res.send({ error: "address is required" })
+            return res.send({ message: "address is required" })
         }
 
         // existing user
@@ -65,7 +65,7 @@ export const loginController = async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(404).send({
+            return res.status(200).send({
                 success: false,
                 message: "Invalid email and Password"
             })
@@ -74,7 +74,7 @@ export const loginController = async (req, res) => {
         // check user
         const user = await userModel.findOne({ email })
         if (!user) {
-            return res.status(404).send({
+            return res.status(200).send({
                 success: false,
                 message: "Email is not registered"
             })
@@ -132,4 +132,3 @@ export const testController = (req, res) => {
     }
 
 }
-    
