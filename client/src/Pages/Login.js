@@ -4,10 +4,15 @@ import axios from "axios"
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from '../context/auth';
+
 const Login = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+
+    // context API
+    const [auth, setAuth] = useAuth()
 
     const navigate = useNavigate()
 
@@ -22,6 +27,14 @@ const Login = () => {
 
             if (res.data.success) {
                 toast.success(res.data.message)
+                setAuth({
+                    ...auth,
+                    user: res.data.user,
+                    token: res.data.token
+                })
+
+                // localStorage
+                localStorage.setItem("auth", JSON.stringify(res.data))
                 navigate("/");
             }
             else {
