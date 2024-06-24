@@ -31,7 +31,8 @@ const Login = () => {
                 setAuth({
                     ...auth,
                     user: res.data.user,
-                    token: res.data.token
+                    token: res.data.token,
+                    role: res.data.role
                 })
 
                 // localStorage

@@ -10,6 +10,8 @@ import Login from "./Pages/Login"
 import Dashboard from './Pages/users/Dashboard'
 import { Toaster } from 'react-hot-toast';
 import Private from './Routes/Private'
+import AdminDashboard from './Pages/admin/AdminDashboard'
+import AdminPrivate from './Routes/AdminPrivate'
 
 
 const App = () => {
@@ -21,9 +23,15 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
 
-        {/* Private Route */}
+        {/* Private Route for user*/}
         <Route path='/dashboard' element={<Private />}>
-          <Route path='' element={<Dashboard />} />
+          <Route path='user' element={<Dashboard />} />
+        </Route>
+
+
+        {/* Private Route for admin*/}
+        <Route path='/dashboard' element={<AdminPrivate />}>
+          <Route path='admin' element={<AdminDashboard />} />
         </Route>
 
 

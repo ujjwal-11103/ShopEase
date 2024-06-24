@@ -14,8 +14,14 @@ router.post('/register', registerController)
 // Login || POST
 router.post('/login', loginController)
 
-// dashboard || GET
+// dashboard user || GET
 router.get('/user-auth', requireSignIn, (req, res) => {
+    res.status(200).send({
+        ok: true,
+    })
+})
+// dashboard admin || GET
+router.get('/admin-auth', requireSignIn, isAdmin, (req, res) => {
     res.status(200).send({
         ok: true,
     })

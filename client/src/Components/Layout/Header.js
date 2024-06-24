@@ -12,9 +12,10 @@ const Header = () => {
         setAuth({
             ...user,
             user: null,
-            token: " "
+            token: "",
+            role: ""
         })
-        toast.success("Logout Successfull")
+        toast.success("Logout Success")
         localStorage.removeItem('auth')
     }
 
@@ -54,9 +55,21 @@ const Header = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <li className="nav-item">
-                                            <NavLink to='/login' onClick={handleLogout} className="nav-link">LOGOUT</NavLink>
+
+                                        <li className="nav-item dropdown">
+                                            <NavLink className="nav-link dropdown-toggle" href='#' role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {user.name}
+                                            </NavLink>
+                                            <ul className="dropdown-menu">
+                                                <li>
+                                                    <NavLink to={`/dashboard/${user.role === 1 ? "admin" : "user"}`} className="nav-link">Dashboard</NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to='/login' onClick={handleLogout} className="nav-link">LOGOUT</NavLink>
+                                                </li>
+                                            </ul>
                                         </li>
+
                                     </>
                                 )
                             }
