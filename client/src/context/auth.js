@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useContext, createContext } from 'react'
+import axios from 'axios';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({
         user: null,
-        token: " "
+        token: ""
     })
+
+    // default axios
+    axios.defaults.headers.common["authorization"] = auth?.token;
+
 
     // data agr pehle se hi rhega toh usko print krwa do
     useEffect(() => {
@@ -21,6 +26,7 @@ const AuthProvider = ({ children }) => {
                 token: parseData.token
             })
         }
+        // eslint-disable-next-line
     }, [])
 
     return (

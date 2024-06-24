@@ -14,6 +14,13 @@ router.post('/register', registerController)
 // Login || POST
 router.post('/login', loginController)
 
+// dashboard || GET
+router.get('/user-auth', requireSignIn, (req, res) => {
+    res.status(200).send({
+        ok: true,
+    })
+})
+
 // test middleware
 router.get('/test', requireSignIn, isAdmin, testController)
 
