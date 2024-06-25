@@ -12,6 +12,11 @@ import { Toaster } from 'react-hot-toast';
 import Private from './Routes/Private'
 import AdminDashboard from './Pages/admin/AdminDashboard'
 import AdminPrivate from './Routes/AdminPrivate'
+import CreateCategory from './Pages/admin/CreateCategory'
+import AllUsers from './Pages/admin/AllUsers'
+import CreateProduct from './Pages/admin/CreateProduct'
+import Profile from './Pages/users/Profile'
+import Order from './Pages/users/Order'
 
 
 const App = () => {
@@ -27,12 +32,17 @@ const App = () => {
         <Route path='/dashboard' element={<Private />}>
           <Route path='user' element={<Dashboard />} />
         </Route>
+        <Route path='/dashboard/user/profile' element={<Profile />} />
+        <Route path='/dashboard/user/orders' element={<Order />} />
 
 
         {/* Private Route for admin*/}
         <Route path='/dashboard' element={<AdminPrivate />}>
           <Route path='admin' element={<AdminDashboard />} />
         </Route>
+        <Route path='/dashboard/admin/create-category' element={<CreateCategory />} />
+        <Route path='/dashboard/admin/create-product' element={<CreateProduct />} />
+        <Route path='/dashboard/admin/users' element={<AllUsers />} />
 
 
         <Route path='/about' element={<About />} />
