@@ -63,3 +63,41 @@ export const updateCategoryController = async (req, res) => {
         })
     }
 }
+
+// READ (all categories)
+export const getCategoryController = async (req, res) => {
+    try {
+        const categories = await categoryModel.find({})
+        res.send({
+            success: true,
+            message: "All categories",
+            categories
+        })
+    } catch (error) {
+        console.log(error);
+        res.send({
+            success: false,
+            message: "Failed to load all categories"
+        })
+    }
+}
+
+// READ (single category)
+export const singleCategoryController = async (req, res) => {
+    try {
+
+        const category = await categoryModel.findOne({ slug: req.params.slug })
+        res.send({
+            success: true,
+            message: "Single Category",
+            category
+        })
+    } catch (error) {
+        console.log(error);
+        res.send({
+            success: false,
+            message: "Error getting single category"
+        })
+    }
+
+}
