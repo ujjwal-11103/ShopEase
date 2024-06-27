@@ -1,10 +1,15 @@
 import express from "express"
 import colors from "colors"
+
 import dotenv from "dotenv"
 import morgan from "morgan";
+import formidableMiddleware from "express-formidable"
+
 import connectDB from "./config/db.js";
 import authRoute from "./Routes/authRoute.js";
 import categoryRoute from "./Routes/categoryRoute.js";
+import productRoute from "./Routes/productRoute.js"
+
 import cors from 'cors'
 
 
@@ -20,6 +25,8 @@ const app = express();
 // middleware
 app.use(express.json())
 app.use(morgan('dev'))
+// app.use(formidableMiddleware());
+
 
 // cors 
 app.use(cors())
@@ -27,6 +34,7 @@ app.use(cors())
 // routes
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/category', categoryRoute)
+app.use('/api/v1/product', productRoute)
 
 
 // rest APi
