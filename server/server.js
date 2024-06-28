@@ -3,7 +3,6 @@ import colors from "colors"
 
 import dotenv from "dotenv"
 import morgan from "morgan";
-import formidableMiddleware from "express-formidable"
 
 import connectDB from "./config/db.js";
 import authRoute from "./Routes/authRoute.js";
@@ -25,7 +24,6 @@ const app = express();
 // middleware
 app.use(express.json())
 app.use(morgan('dev'))
-// app.use(formidableMiddleware());
 
 
 // cors 

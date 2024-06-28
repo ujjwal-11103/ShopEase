@@ -1,7 +1,6 @@
 import slugify from "slugify";
 import productModel from "../Models/productModel.js";
 import fs from "fs"
-import { count } from "console";
 
 // CREATE
 export const createProductController = async (req, res) => {

@@ -23,6 +23,4 @@ router.delete("/delete-product/:productid", requireSignIn, isAdmin, formidable()
 // UPDATE 
 router.put("/update-product/:productid", requireSignIn, isAdmin, formidable(), updateProductController)
 
-
-
 export default router
