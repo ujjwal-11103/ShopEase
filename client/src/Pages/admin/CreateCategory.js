@@ -43,7 +43,7 @@ const CreateCategory = () => {
             const { data } = await axios.get('/api/v1/category/get-categories')
             // const res = await axios.get('/api/v1/category/get-categories')
 
-            console.log(data.categories);
+            // console.log(data.categories);
             // console.log("res");
             // console.log(res);
 
