@@ -17,6 +17,8 @@ import AllUsers from './Pages/admin/AllUsers'
 import CreateProduct from './Pages/admin/CreateProduct'
 import Profile from './Pages/users/Profile'
 import Order from './Pages/users/Order'
+import Products from './Pages/admin/Products'
+import UpdateProduct from './Pages/admin/UpdateProduct'
 
 
 const App = () => {
@@ -42,6 +44,8 @@ const App = () => {
         </Route>
         <Route path='/dashboard/admin/create-category' element={<CreateCategory />} />
         <Route path='/dashboard/admin/create-product' element={<CreateProduct />} />
+        <Route path='/dashboard/admin/products' element={<Products />} />
+        <Route path='/dashboard/admin/product/:slug' element={<UpdateProduct />} />
         <Route path='/dashboard/admin/users' element={<AllUsers />} />
 
 

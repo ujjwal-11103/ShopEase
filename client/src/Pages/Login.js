@@ -52,21 +52,21 @@ const Login = () => {
         <div>
             <Layout title={"Login"}>
 
-                <div class="border-light d-flex justify-content-center align-items-center flex-column ">
-                    <h1 class='mb-3'>Login</h1>
+                <div className="border-light d-flex justify-content-center align-items-center flex-column ">
+                    <h1 className='mb-3'>Login</h1>
                     <form className='border p-5' onSubmit={handleSubmit} >
 
 
-                        <div class="form-group mb-3">
-                            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                        <div className="form-group mb-3">
+                            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                         </div>
 
-                        <div class="form-group mb-3">
-                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                        <div className="form-group mb-3">
+                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="exampleInputPassword1" placeholder="Password" />
                         </div>
 
                         <div className='d-flex justify-content-center '>
-                            <button type="submit" class="btn btn-primary mt-3 text-center">Login</button>
+                            <button type="submit" className="btn btn-primary mt-3 text-center">Login</button>
                         </div>
                     </form>
                 </div>

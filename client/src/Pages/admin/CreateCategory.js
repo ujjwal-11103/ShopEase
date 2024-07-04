@@ -117,7 +117,7 @@ const CreateCategory = () => {
                                 <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
                             </div>
                             <div className='w-75'>
-                                <table class="table">
+                                <table className="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>

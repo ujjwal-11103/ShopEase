@@ -33,24 +33,24 @@ const Contact = () => {
                         </div>
                     </div>
                 </div> */}
-                <div class="container mt-5">
+                <div className="container mt-5">
                     <img src="/images/ContactUs.png" alt="contact" />
 
                     <h1>Contact Us</h1>
                     <form>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Your Name" />
+                        <div className="mb-3">
+                            <label for="name" className="form-label">Name</label>
+                            <input type="text" className="form-control" id="name" placeholder="Your Name" />
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Your Email" />
+                        <div className="mb-3">
+                            <label for="email" className="form-label">Email</label>
+                            <input type="email" className="form-control" id="email" placeholder="Your Email" />
                         </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+                        <div className="mb-3">
+                            <label for="message" className="form-label">Message</label>
+                            <textarea className="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                        <button type="submit" className="btn btn-primary mb-2">Submit</button>
                     </form>
                 </div>
             </Layout>

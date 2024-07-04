@@ -28,10 +28,10 @@ const Spinner = ({ path = "login" }) => {
     }, [count, navigate, location.pathname, path]);
 
     return (
-        <div class="w-100 d-flex flex-column justify-content-center align-items-center" style={{ height: "80vh" }}>
-            <div class="font-weight-normal mb-3 "><h2>Login first</h2></div>
-            <div class="font-weight-normal mb-3 "><h2>Redirecting to Login Page in {count}</h2></div>
-            <div class="spinner-border" role="status">
+        <div className="w-100 d-flex flex-column justify-content-center align-items-center" style={{ height: "80vh" }}>
+            <div className="font-weight-normal mb-3 "><h2>Login first</h2></div>
+            <div className="font-weight-normal mb-3 "><h2>Redirecting to Login Page in {count}</h2></div>
+            <div className="spinner-border" role="status">
             </div>
         </div>
     )

@@ -4,8 +4,8 @@ const Policy = () => {
     return (
         <div>
             <Layout title={"Privacy Policy"}>
-                <div class="container mt-5">
-                    <h1 className='mb-5'>Privacy Policy :</h1>
+                <div className="container mt-5">
+                    <h1 classNameName='mb-5'>Privacy Policy :</h1>
 
                     <h2>Information We Collect</h2>
                     <p>Personal Information: Name, Email address, Shipping and billing address, Phone number, Payment information.</p>

@@ -65,7 +65,7 @@ export const getProductController = async (req, res) => {
         const products = await productModel.find({}).select("-photo").limit(12).sort({ createdAt: -1 }).populate("category");
 
         res.send({
-            status: true,
+            success: true,
             countTota: products.length,
             message: "All products",
             products
@@ -89,7 +89,7 @@ export const getSingleProductController = async (req, res) => {
         const products = await productModel.findOne({ slug }).select("-photo").populate("category");
 
         res.send({
-            status: true,
+            success: true,
             message: "Single product",
             products
         })
@@ -174,7 +174,7 @@ export const updateProductController = async (req, res) => {
         }
 
         res.send({
-            status: true,
+            success: true,
             message: "Product updated successfully",
             products
         })
