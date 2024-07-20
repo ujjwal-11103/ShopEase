@@ -3,9 +3,13 @@ import "../../Styles/Header.css"
 import { Link, NavLink } from "react-router-dom"
 import { useAuth } from '../../context/auth'
 import toast from 'react-hot-toast'
+import SearchInput from './Form/SearchInput'
+import useCategory from '../../hooks/useCategory'
+
 
 const Header = () => {
 
+    // Auth
     const [auth, setAuth] = useAuth();
     const user = auth.user;
     const handleLogout = () => {
@@ -18,6 +22,9 @@ const Header = () => {
         toast.success("Logout Success")
         localStorage.removeItem('auth')
     }
+
+
+    const { category } = useCategory()
 
     return (
         <>
@@ -36,12 +43,24 @@ const Header = () => {
                             </Link>
                         </div>
 
+
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                            <SearchInput />
+
                             <li className="nav-item">
                                 <NavLink to='/' className="nav-link" aria-current="page">HOME</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink to='/category' className="nav-link">CATEGORY</NavLink>
+                            <li className="nav-item dropdown">
+                                <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    CATEGORY
+                                </Link>
+
+                                <ul className="dropdown-menu">
+                                    {category?.map((c) => (
+                                        <li><Link to={`/category/${c.slug}`} className="dropdown-item" >{c.name}</Link></li>
+                                    ))}
+                                </ul>
                             </li>
                             {
                                 !user ? (

@@ -187,3 +187,48 @@ export const updateProductController = async (req, res) => {
         })
     }
 }
+
+// SEARCH
+export const searchProductController = async (req, res) => {
+    const { keyword } = req.params
+
+    try {
+        const result = await productModel.find({
+            $or: [
+
+                {
+                    name: { $regex: keyword, $options: "i" },
+                    description: { $regex: keyword, $options: "i" }
+                }
+            ]
+        }).select("-photo")
+        res.json(result)
+
+
+    } catch (error) {
+        console.log(error);
+        error
+    }
+}
+
+// Related Product
+export const relatedProductController = async (req, res) => {
+
+    const { pid, cid } = req.params
+
+    try {
+        const products = await productModel.find({
+            category: cid,
+            _id: { $ne: pid }
+        }).select("-photo").limit(3).populate("category")
+
+        res.send({
+            success: true,
+            message: "Similar Product Fetched",
+            products
+        })
+    } catch (error) {
+        console.log(error);
+    }
+
+}

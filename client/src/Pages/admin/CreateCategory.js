@@ -24,6 +24,7 @@ const CreateCategory = () => {
             const { data } = await axios.post('/api/v1/category/create-category', { name })
             if (data?.success) {
                 toast.success(`${name} category is created`)
+                setName("")
                 getAllCategory();
             }
             else {
@@ -35,7 +36,7 @@ const CreateCategory = () => {
         }
 
     }
-    
+
     //READ
     const getAllCategory = async () => {
 
