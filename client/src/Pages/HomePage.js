@@ -3,9 +3,7 @@ import Layout from '../Components/Layout/Layout'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
-// import { Checkbox, Radio } from "antd"
-// import { Price } from '../Components/Layout/Price'
+import { useCart } from '../context/cart'
 
 const HomePage = () => {
 
@@ -13,6 +11,10 @@ const HomePage = () => {
     const [, setProductAvail] = useState(true)
 
     const navigate = useNavigate();
+
+
+    // Context api hook
+    const [cart, setCart] = useCart();
 
 
     //GET PRODUCTS
@@ -29,6 +31,8 @@ const HomePage = () => {
 
             if (data.success) {
                 setProducts(data.products)
+                console.log("cart");
+                console.log(cart);
                 // toast.success("Products Fetched")
             }
 
@@ -101,7 +105,12 @@ const HomePage = () => {
                                         <p className="card-text">{p.description}</p>
                                         <h5 className="card-title">Price: {p.price}</h5>
                                         <button class="btn btn-primary ms-1" onClick={() => navigate(`product/${p.slug}`)}>More Details</button>
-                                        <button class="btn btn-secondary ms-1">Add to cart</button>
+                                        <button class="btn btn-secondary ms-1"
+                                            onClick={() => {
+                                                setCart([...cart, p]);
+                                                toast.success("Item Added to cart")
+                                                localStorage.setItem("cart", (JSON.stringify([...cart, p])))
+                                            }} >Add to cart</button>
                                     </div>
                                 </div>
                             ))

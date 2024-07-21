@@ -5,7 +5,9 @@ import { useAuth } from '../../context/auth'
 import toast from 'react-hot-toast'
 import SearchInput from './Form/SearchInput'
 import useCategory from '../../hooks/useCategory'
+import { useCart } from '../../context/cart'
 
+import { Badge } from "antd"
 
 const Header = () => {
 
@@ -15,7 +17,7 @@ const Header = () => {
     const handleLogout = () => {
         setAuth({
             ...user,
-            user: null,
+            user: null, 
             token: "",
             role: ""
         })
@@ -23,8 +25,11 @@ const Header = () => {
         localStorage.removeItem('auth')
     }
 
-
+    //custom hook
     const { category } = useCategory()
+
+    // context api hook
+    const [cart, ] = useCart();
 
     return (
         <>
@@ -93,7 +98,7 @@ const Header = () => {
                                 )
                             }
                             <li className="nav-item">
-                                <NavLink to='/cart' className="nav-link">CART (0)</NavLink>
+                                <NavLink to='/cart' className="nav-link">CART <Badge count={cart?.length} showZero /> </NavLink>
                             </li>
 
                         </ul>
