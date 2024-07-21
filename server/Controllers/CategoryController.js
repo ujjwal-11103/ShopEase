@@ -123,3 +123,4 @@ export const deleteCategoryController = async (req, res) => {
     }
 
 }
+

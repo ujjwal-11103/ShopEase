@@ -1,6 +1,7 @@
 import slugify from "slugify";
 import productModel from "../Models/productModel.js";
 import fs from "fs"
+import categoryModel from "../Models/categoryModel.js";
 
 // CREATE
 export const createProductController = async (req, res) => {
@@ -231,4 +232,30 @@ export const relatedProductController = async (req, res) => {
         console.log(error);
     }
 
+}
+
+// CATEGORY PRODUCT
+export const categoryProductController = async (req, res) => {
+
+    const { CatName } = req.params
+
+    console.log(CatName);
+    try {
+        const category = await categoryModel.findOne({ slug: CatName })
+        const products = await productModel.find({ category }).populate("category")
+
+        res.send({
+            success: true,
+            message: "Category products delivered successfully ",
+            products
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.send({
+            success: false,
+            message: "Failed to load category product",
+            CatName
+        })
+    }
 }
