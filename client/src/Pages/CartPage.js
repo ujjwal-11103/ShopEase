@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '../Components/Layout/Layout';
 import { useCart } from '../context/cart';
 import { useAuth } from '../context/auth';
@@ -7,14 +7,40 @@ const CartPage = () => {
     const [cart, setCart] = useCart();
     const [auth] = useAuth();
 
-    const handleRemove = (pid) => {
-        console.log(pid);
-        setCart((prevcart) => prevcart.filter((p) => p._id !== pid));
-    };
 
-    useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify([...cart]))
-    }, [cart])
+    // REMOVE PRODUCT FROM CART
+    // const handleRemove = async (pid) => {
+    //     console.log(pid);
+    //     await setCart((prevcart) => prevcart.filter((p) => p._id !== pid));
+    //     localStorage.setItem('cart', JSON.stringify([...cart]))
+    // };
+
+
+    // REMOVE PRODUCT FROM CART
+    const handleRemove = (pid) => {
+        let myCart = [...cart]
+        let index = myCart.findIndex((item) => item._id === pid)
+        myCart.splice(index, 1)
+        setCart(myCart);
+        localStorage.setItem('cart', JSON.stringify(myCart))
+    }
+
+    // TOTAL PRICE
+    const price = () => {
+        try {
+            let totalPrice = 0;
+            cart?.map((item) => {
+                totalPrice = totalPrice + item.price;
+            });
+            return totalPrice.toLocaleString("en-US", {
+                style: "currency",
+                currency: "INR"
+            })
+        } catch (error) {
+            console.log(error);
+            return '$0.00'
+        }
+    }
 
     return (
         <Layout>
@@ -45,8 +71,11 @@ const CartPage = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="col-md-3">
-                        Checkout || Payment
+                    <div className="col-md-4 text-center">
+                        <h2 className='text-center'>Cart Summary</h2>
+                        <p className='text-center'>Total | Checkout | Payment</p>
+                        <hr />
+                        <h3>Total : {price()}</h3>
                     </div>
                 </div>
             </div>

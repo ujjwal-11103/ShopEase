@@ -19,7 +19,7 @@ const CartProvider = ({ children }) => {
     );
 };
 
-// Custom hook to use the SearchContext
+// Custom hook to use the Context
 const useCart = () => useContext(CartContext);
 
 export { useCart, CartProvider };
