@@ -92,12 +92,14 @@ export const loginController = async (req, res) => {
         // Token
         const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" })
 
+        const hashedPassword = await hashPassword(user.password)
         return res.status(200).send({
             success: true,
             message: "Login successfull",
             user: {
                 name: user.name,
                 email: user.email,
+                password: hashedPassword,
                 phone: user.phone,
                 address: user.address,
                 role: user.role
@@ -113,6 +115,39 @@ export const loginController = async (req, res) => {
         })
     }
 
+}
+
+
+// profileUpdate
+export const updateProfileController = async (req, res) => {
+
+    const { name, password, address, phone } = req.body
+
+    try {
+
+        const hashedPassword = password ? await hashPassword(password) : undefined
+        const updatedProfile = await userModel.findByIdAndUpdate(req.user._id, {
+            name: name || user.name,
+            password: hashedPassword || user.password,
+            phone: phone || user.phone,
+            address: address || user.address
+        }, {
+            new: true
+        })
+
+        res.send({
+            success: true,
+            message: "Profile Updated successfully",
+            updatedProfile
+        })
+
+    } catch (error) {
+        res.send({
+            success: false,
+            error: error,
+            message: "error in profile updation"
+        })
+    }
 }
 
 

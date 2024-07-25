@@ -7,40 +7,37 @@ const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({
         user: null,
         token: ""
-    })
+    });
 
-    // default axios
-    axios.defaults.headers.common["authorization"] = auth?.token;
-
-
-    // data agr pehle se hi rhega toh usko print krwa do
+    // Set default axios header
     useEffect(() => {
-        const data = localStorage.getItem('auth')
+        axios.defaults.headers.common["authorization"] = auth?.token;
+    }, [auth?.token]);
 
-        const parseData = JSON.parse(data)
-
+    // Get auth data from localStorage
+    useEffect(() => {
+        const data = localStorage.getItem('auth');
         if (data) {
+            const parseData = JSON.parse(data);
             setAuth({
                 ...auth,
                 user: parseData.user,
                 token: parseData.token
-            })
+            });
+            console.log("Auth data set from localStorage:", parseData);
+        } else {
+            console.log("No auth data found in localStorage.");
         }
-        // eslint-disable-next-line
-    }, [])
+    }, []);
 
     return (
-        <div>
-            <AuthContext.Provider value={[auth, setAuth]}>
-                {children}
-            </AuthContext.Provider>
-        </div>
-    )
-
+        <AuthContext.Provider value={[auth, setAuth]}>
+            {children}
+        </AuthContext.Provider>
+    );
 }
 
-// custom hook
+// Custom hook
 const useAuth = () => useContext(AuthContext);
 
 export { useAuth, AuthProvider };
-

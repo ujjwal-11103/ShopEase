@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../Components/Layout/Layout';
 import axios from "axios"
 import toast from 'react-hot-toast';
@@ -32,11 +32,14 @@ const Login = () => {
                     ...auth,
                     user: res.data.user,
                     token: res.data.token,
-                    role: res.data.role
+                    role: res.data.user.role
                 })
+                // console.log(res.data.user.role);
+                // console.log(res.data.user);
 
                 // localStorage
                 localStorage.setItem("auth", JSON.stringify(res.data))
+                console.log("auth stored in local storage");
                 navigate(location.state || "/");
             }
             else {
@@ -48,6 +51,7 @@ const Login = () => {
         }
 
     }
+
     return (
         <div>
             <Layout title={"Login"}>

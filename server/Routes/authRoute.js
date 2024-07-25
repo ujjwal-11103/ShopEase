@@ -1,5 +1,5 @@
 import express from "express";
-import { registerController, loginController, testController } from "../Controllers/authController.js"
+import { registerController, loginController, testController, updateProfileController } from "../Controllers/authController.js"
 import { isAdmin, requireSignIn } from "../Middlewares/authMiddleware.js";
 
 // Router object
@@ -11,7 +11,7 @@ const router = express.Router();
 // Register ||  POST 
 router.post('/register', registerController)
 
-// Login || POST
+// Login || POSTdgfdgdf
 router.post('/login', loginController)
 
 // dashboard user || GET
@@ -26,6 +26,10 @@ router.get('/admin-auth', requireSignIn, isAdmin, (req, res) => {
         ok: true,
     })
 })
+
+//Update Profile
+router.put('/profileUpdate', requireSignIn, updateProfileController)
+
 
 // test middleware
 router.get('/test', requireSignIn, isAdmin, testController)

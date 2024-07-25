@@ -2,11 +2,13 @@ import React from 'react';
 import Layout from '../Components/Layout/Layout';
 import { useCart } from '../context/cart';
 import { useAuth } from '../context/auth';
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
     const [cart, setCart] = useCart();
     const [auth] = useAuth();
 
+    const navigate = useNavigate()
 
     // REMOVE PRODUCT FROM CART
     // const handleRemove = async (pid) => {
@@ -76,6 +78,30 @@ const CartPage = () => {
                         <p className='text-center'>Total | Checkout | Payment</p>
                         <hr />
                         <h3>Total : {price()}</h3>
+                        {
+                            auth?.user?.address ?
+                                (
+                                    <div className='d-flex justify-content-center align-items-cener flex-column'>
+                                        <h5>Address : {auth?.user?.address}</h5>
+                                        <div className="d-flex gap-3 justify-content-center align-items-cener"> 
+
+                                            <button className='btn btn-outline-warning text-black' onClick={() => navigate('/dashboard/user/profile')}>Update Address</button>
+                                            <button className='btn btn-success' onClick={() => navigate('/dashboard/user/profile')}>Checkout</button>
+                                        </div>
+                                    </div>
+                                )
+                                :
+                                (
+                                    <>
+                                        {auth?.token ?
+                                            (<><button className='btn btn-outline-warning text-black' onClick={() => navigate('/dashboard/user/profile')}>Update Address</button>
+                                            </>)
+                                            :
+                                            (<><button className='btn btn-outline-warning text-black' onClick={() => navigate('/login')}>Please Login to checkout</button>
+                                            </>)}
+                                    </>
+                                )
+                        }
                     </div>
                 </div>
             </div>
