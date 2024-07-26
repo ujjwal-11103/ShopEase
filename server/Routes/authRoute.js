@@ -30,6 +30,10 @@ router.get('/admin-auth', requireSignIn, isAdmin, (req, res) => {
 //Update Profile
 router.put('/profileUpdate', requireSignIn, updateProfileController)
 
+// get orders
+router.get("/orders",orderController)
+
+
 
 // test middleware
 router.get('/test', requireSignIn, isAdmin, testController)

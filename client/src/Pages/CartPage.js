@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../Components/Layout/Layout';
 import { useCart } from '../context/cart';
 import { useAuth } from '../context/auth';
 import { useNavigate } from 'react-router-dom';
+import DropIn from "braintree-web-drop-in-react";
+import axios from 'axios';
+import toast from 'react-hot-toast';
+
+
 
 const CartPage = () => {
     const [cart, setCart] = useCart();
     const [auth] = useAuth();
 
     const navigate = useNavigate()
+
+    const [clientToken, setClientToken] = useState("");
+    const [instance, setInstance] = useState();
+    const [loading, setLoading] = useState(false);
+
 
     // REMOVE PRODUCT FROM CART
     // const handleRemove = async (pid) => {
@@ -44,6 +54,46 @@ const CartPage = () => {
         }
     }
 
+    // Get payment token
+    const getToken = async () => {
+        try {
+            const { data } = await axios.get("/api/v1/product/braintree/token")
+            console.log("In get Token");
+            setClientToken(data?.message?.clientToken)
+            // console.log(data?.message?.clientToken);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    useEffect(() => {
+        getToken()
+    }, [auth?.token])
+
+    // useEffect(() => {
+    //     console.log("Clent toekn data");
+    //     console.log(clientToken);
+    // }, [clientToken])
+
+    // handle payment
+    const handlePayment = async () => {
+        try {
+            const { nonce } = await instance.requestPaymentMethod();
+            const { data } = await axios.post("/api/v1/product/braintree/payment", {
+                nonce, cart
+            })
+            console.log(data);
+            setLoading(false)
+            localStorage.removeItem("cart")
+            setCart([])
+            toast.success("Payment Successfull")
+            navigate("/dashboard/user/orders")
+        } catch (error) {
+            setLoading(false)
+            console.log(error);
+        }
+    };
     return (
         <Layout>
             <div className="container">
@@ -83,10 +133,9 @@ const CartPage = () => {
                                 (
                                     <div className='d-flex justify-content-center align-items-cener flex-column'>
                                         <h5>Address : {auth?.user?.address}</h5>
-                                        <div className="d-flex gap-3 justify-content-center align-items-cener"> 
+                                        <div className="d-flex gap-3 justify-content-center align-items-cener">
 
                                             <button className='btn btn-outline-warning text-black' onClick={() => navigate('/dashboard/user/profile')}>Update Address</button>
-                                            <button className='btn btn-success' onClick={() => navigate('/dashboard/user/profile')}>Checkout</button>
                                         </div>
                                     </div>
                                 )
@@ -97,11 +146,27 @@ const CartPage = () => {
                                             (<><button className='btn btn-outline-warning text-black' onClick={() => navigate('/dashboard/user/profile')}>Update Address</button>
                                             </>)
                                             :
-                                            (<><button className='btn btn-outline-warning text-black' onClick={() => navigate('/login')}>Please Login to checkout</button>
+                                            (<><button className='btn btn-outline-warning text-black' onClick={() => navigate('/login', { state: "/cart" })}>Please Login to checkout</button>
                                             </>)}
                                     </>
                                 )
                         }
+                        {(clientToken && cart?.length > 0) && (
+
+                            <div className="mt-2">
+
+                                <DropIn
+                                    options={{
+                                        authorization: clientToken,
+                                        paypal: {
+                                            flow: "vault"
+                                        }
+                                    }}
+                                    onInstance={(instance) => setInstance(instance)}
+                                />
+                                <button className='btn btn-success' onClick={handlePayment} disabled={loading || !instance || !auth?.user?.address}>{loading ? "Processing" : "Make Payment"}</button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

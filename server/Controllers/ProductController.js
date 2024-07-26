@@ -1,7 +1,20 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import slugify from "slugify";
 import productModel from "../Models/productModel.js";
 import fs from "fs"
 import categoryModel from "../Models/categoryModel.js";
+import braintree from "braintree"
+import orderModel from "../Models/orderModel.js";
+
+
+var gateway = new braintree.BraintreeGateway({
+    environment: braintree.Environment.Sandbox,
+    merchantId: process.env.MERCHANT_ID,
+    publicKey: process.env.PUBLIC_KEY,
+    privateKey: process.env.PRIVATE_KEY,
+});
 
 // CREATE
 export const createProductController = async (req, res) => {
@@ -257,5 +270,62 @@ export const categoryProductController = async (req, res) => {
             message: "Failed to load category product",
             CatName
         })
+    }
+}
+
+// BRAINTREE TOKEN
+export const braintreeTokenController = async (req, res) => {
+    try {
+        gateway.clientToken.generate({}, function (err, response) {
+            if (err) {
+                console.error(err);
+                res.send({
+                    message: err
+                })
+            }
+            else {
+                res.send({
+                    message: response
+                })
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// BRAINTREE PAYMENT
+export const braintreePaymentController = async (req, res) => {
+    try {
+        const { cart, nounce } = req.body
+        let total = 0;
+        cart.map((item) => {
+            total = total + item.price
+        })
+
+        let newTransaction = gateway.transaction.sale(
+            {
+                amount: total,
+                paymentMethodNonce: nounce,
+                options: {
+                    submitForSettlement: true,
+                },
+            },
+            function (err, result) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                else if (result) {
+                    const order = new orderModel({
+                        products: cart,
+                        payment: result,
+                        buyer: req.user._id,
+                    }).save()
+                    res.json({ ok: true })
+                }
+            })
+    } catch (error) {
+        console.log(error);
     }
 }
