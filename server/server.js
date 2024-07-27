@@ -11,6 +11,10 @@ import productRoute from "./Routes/productRoute.js"
 
 import cors from 'cors'
 
+// Production
+import path from "path"
+import { fileURLToPath } from "url"
+
 
 // config dotenv
 dotenv.config();
@@ -24,6 +28,16 @@ const app = express();
 // middleware
 app.use(express.json())
 app.use(morgan('dev'))
+
+//production
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
+
+app.use(express.static(path.join(__dirname, '../client/build',)))
+app.use("*", function (req, res) {
+    res.sendFile(path.join(__dirname, '../client/build/index.html',))
+})
+
 
 
 // cors 
