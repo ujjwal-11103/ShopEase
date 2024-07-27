@@ -154,10 +154,60 @@ export const updateProfileController = async (req, res) => {
 //order
 export const orderController = async (req, res) => {
     try {
-        const orders = await orderModel.find({ buyer: req.user._id }).populate("products", "-photo").populate("buyer", 'name');
-        res.json(orders)
+        const orders = await orderModel.find({ buyer: req.user._id }).populate("products", "-photo").populate("buyer", 'name').sort({ createdAt: -1 });
+        // res.json(orders) 
+        res.send({
+            success: true,
+            message: "Orders Provided",
+            orders
+        })
     } catch (error) {
         console.log(error);
+        res.send({
+            success: false,
+            message: "faile dto load orders"
+        })
+    }
+}
+
+//All-order
+export const allOrderController = async (req, res) => {
+    try {
+        const orders = await orderModel.find({}).populate("products", "-photo").populate("buyer", 'name').sort({ createdAt: -1 });
+        // res.json(orders) 
+        res.send({
+            success: true,
+            message: "Orders Provided",
+            orders
+        })
+    } catch (error) {
+        console.log(error);
+        res.send({
+            success: false,
+            message: "faile dto load orders"
+        })
+    }
+}
+
+
+//All-order
+export const orderStatusController = async (req, res) => {
+    try {
+        const { orderId } = req.params
+        const { status } = req.body
+        const orders = await orderModel.findByIdAndUpdate(orderId, { status }, { new: true });
+        // res.json(orders) 
+        res.send({
+            success: true,
+            message: "Orders status Updated",
+            orders
+        })
+    } catch (error) {
+        console.log(error);
+        res.send({
+            success: false,
+            message: "faile dto load orders"
+        })
     }
 }
 

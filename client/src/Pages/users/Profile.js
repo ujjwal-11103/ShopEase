@@ -20,7 +20,7 @@ const Profile = () => {
             const { name, email, password, address, phone } = auth.user;
             setName(name);
             setEmail(email);
-            setPassword(password);
+            // setPassword(password);
             setAddress(address);
             setPhone(phone);
         }

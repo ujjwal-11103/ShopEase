@@ -297,7 +297,7 @@ export const braintreeTokenController = async (req, res) => {
 // BRAINTREE PAYMENT
 export const braintreePaymentController = async (req, res) => {
     try {
-        const { cart, nounce } = req.body
+        const { cart, nonce } = req.body
         let total = 0;
         cart.map((item) => {
             total = total + item.price
@@ -306,23 +306,27 @@ export const braintreePaymentController = async (req, res) => {
         let newTransaction = gateway.transaction.sale(
             {
                 amount: total,
-                paymentMethodNonce: nounce,
+                paymentMethodNonce: nonce,
                 options: {
                     submitForSettlement: true,
                 },
             },
             function (err, result) {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                else if (result) {
+                if (result) {
                     const order = new orderModel({
                         products: cart,
                         payment: result,
                         buyer: req.user._id,
                     }).save()
-                    res.json({ ok: true })
+                    res.json({ ok: true, message: result })
+                }
+                else {
+                    console.log(err);
+                    res.send({
+                        success: false,
+                        message: err,
+                        message1: "Error in payment"
+                    })
                 }
             })
     } catch (error) {

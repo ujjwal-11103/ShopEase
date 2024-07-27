@@ -23,6 +23,7 @@ import Search from './Pages/Search'
 import ProductDetails from './Pages/ProductDetails'
 import CategoryProduct from './Pages/CategoryProduct'
 import CartPage from './Pages/CartPage'
+import AdminOrders from './Pages/admin/AdminOrders'
 
 const App = () => {
   return (
@@ -36,9 +37,9 @@ const App = () => {
         <Route path='/category/:slug' element={<CategoryProduct />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/cart' element={<CartPage />}/>
+        <Route path='/cart' element={<CartPage />} />
 
-          {/* Private Route for user*/}
+        {/* Private Route for user*/}
         <Route path='/dashboard' element={<Private />}>
           <Route path='user' element={<Dashboard />} />
         </Route>
@@ -55,6 +56,7 @@ const App = () => {
         <Route path='/dashboard/admin/products' element={<Products />} />
         <Route path='/dashboard/admin/product/:slug' element={<UpdateProduct />} />
         <Route path='/dashboard/admin/users' element={<AllUsers />} />
+        <Route path='/dashboard/admin/orders' element={<AdminOrders />} />
 
 
         <Route path='/about' element={<About />} />
